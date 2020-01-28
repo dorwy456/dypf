@@ -41,7 +41,7 @@ module.exports = {
         open:true,
         compress: true,
         host: "localhost",
-        port: 5500
+        port: 5050
   },
   resolve: {
     modules: ['node_modules'],
