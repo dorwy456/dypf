@@ -1,31 +1,56 @@
-var path = require('path');
+const path = require("path");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    context: path.resolve(__dirname, 'src/main/jsx'),
-    entry: {
-        main: './MainPage.jsx',
-        page1: './Page1Page.jsx'
-    },
-    devtool: 'sourcemaps',
-    cache: true,
-    output: {
-        path: __dirname,
-        filename: './src/main/webapp/js/react/[name].bundle.js'
-    },
-    mode: 'none',
-    module: {
-        rules: [ {
-            test: /\.jsx?$/,
-            exclude: /(node_modules)/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: [ '@babel/preset-env', '@babel/preset-react' ]
-                }
+  entry: "./src/Index.js",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname + "/dist")
+  },
+  mode: "none",
+  module: {
+    rules: [
+        {
+          test: /\.(js|jsx)$/,
+          exclude: "/node_modules",
+          use: ['babel-loader']
+        },
+        {
+          test: /\.html$/,
+          use: [
+            {
+              loader: "html-loader",
+              options: { minimize: true }
             }
-        }, {
-            test: /\.css$/,
-            use: [ 'style-loader', 'css-loader' ]
-        } ]
-    }
+          ]
+        },
+        {
+          test: /\.css$/,
+          use: ['css-loader']
+        },
+        {
+          test: /\.svg$/,
+          loader: 'file-loader'
+        }
+      ]
+  },
+  devServer: {
+        contentBase: path.resolve(__dirname + "/dist"),
+        inline: true,
+        hot: true,
+        open:true,
+        compress: true,
+        host: "localhost",
+        port: 5500
+  },
+  resolve: {
+    modules: ['node_modules'],
+    extensions:['*','.js','.json','.jsx','.css','.ts','.tsx']
+  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: './src/index.html', // public/index.html 파일을 읽는다.
+      filename: 'index.html' // output으로 출력할 파일은 index.html 이다.
+    })
+  ]
 };
