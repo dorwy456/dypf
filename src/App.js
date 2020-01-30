@@ -4,9 +4,9 @@ import axios from 'axios';
 class App extends React.Component {
 
 clickEvent = () =>{
-  axios.get('http://localhost:8080/hello')
+  axios.get('http://localhost:8080/login.do')
   .then(response=>{
-    alert(response+"클릭");
+    alert(response.data+"클릭");
     console.log("asdfasdf");
   })
   .catch(function (error){

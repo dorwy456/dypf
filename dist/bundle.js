@@ -8659,9 +8659,11 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(App)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _this.clickEvent = function () {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://localhost:8080/hello').then(function (response) {
-        alert(response + "클릭");
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://localhost:8080/login.do').then(function (response) {
+        alert(response.data + "클릭");
+        console.log("asdfasdf");
       }).catch(function (error) {
+        console.log("asdfasdf");
         alert("error");
       });
     };
